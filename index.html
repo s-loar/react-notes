@@ -9,14 +9,26 @@
     <body>
         <div id='react-container'></div>
         <script type="text/babel">
-            const MyComponent = () => {
-                return <div>
-                    <h1>Hello World</h1>
-                    <p>This is a simple component as a Stateless Function.</p>
-                </div>
-            }
+            var MyComponent = React.createClass({
+                render() {
+                    return <div>
+                        <h1>{this.props.text}</h1>
+                        <p>{this.props.children}</p>
+                    </div>
+                }
+            })
 
-            ReactDOM.render( <MyComponent />, document.getElementById('react-container'))
+            ReactDOM.render( <div>
+                <MyComponent text="Hello World!">
+                    Message 1
+                </MyComponent>
+                <MyComponent text="I am a component">
+                    Message 2
+                </MyComponent>
+                <MyComponent text="reusing the component">
+                    Message 3
+                </MyComponent>
+                </div>, document.getElementById('react-container'))
 
         </script>
 
