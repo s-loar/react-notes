@@ -5,19 +5,39 @@
         <script src="https://fb.me/react-dom-15.2.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <title>React Components</title>
+        <title>React Props and State</title>
     </head>
     <body>
         <div id='react-container'></div>
         <script type="text/babel">
             var Note = React.createClass({
+                getInitialState() {
+                    return {editing: false}
+                },
                 edit() {
-                    alert("Editing Note")
+                    this.setState({editing: true})
+                },
+                save() {
+                    this.setState({editing: false})
+                },
+                cancel() {
+                    this.setState({editing: false})
                 },
                 remove() {
                     alert("Removing Note")
                 },
-                render() {
+                renderForm(){
+                    return(
+                        <div className="note">
+                            <textarea></textarea>
+                            <span>
+                                <button onClick={this.save}>SAVE</button>
+                                <button onClick={this.cancel}>CANCEL</button>
+                            </span>
+                        </div>
+                    )
+                },
+                renderDisplay(){
                     return (
                         <div className="note">
                             <p>{this.props.children}</p>
@@ -27,6 +47,10 @@
                             </span>
                         </div>
                     )
+                },
+                render() {
+                    return (this.state.editing) ? this.renderForm() 
+                                                : this.renderDisplay()
                 }
             })
 
